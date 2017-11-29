@@ -1,0 +1,22 @@
+Question #1: Five jobs were created.
+Question #2: inferSchema - It was triggered by the inferSchema - the entire data set had to be read in.
+Question #3: initialDF.count() - The count() operation forces us to process all records and thus materialize the cache.
+Question #4: someDF.count() - Both the Jobs tab and the SQL (though more obvious here) will show that the same call triggered two different jobs. This was because Spark chose to trigger a secondary job to determine if it should use a range partitioner or a hash partitioner. This topic will be explored more in the Partitioning notebook.
+Question #5: take(total) - The take() operation returns N records back to the driver after processing all the transformations.
+Question #6: 2
+Question #7: 8
+Question #8: The green dot shows us when the data was cached.
+Question #9.1: .groupBy("project", "first").sum()
+Question #9.2: .orderBy("first", "project")
+Question #9.3: count() requires the records to be counted within each partition, shuffle the result of those counts, and then aggreagte the results for the final total.
+Question #10: It was skipped because of the previous shuffle operation.
+Question #11: In this case, scheduling takes the longest amount of time. At 200 tasks, more time is spent figuring out what to do than actually doing it.
+Question #12: We read in 8 partitions (nothing to do with the number of cores) and each partition is cached in whole.
+Question #13: In this case, true. We can see this by roughly the same size of data in each partition.
+Question #14: Roughly 55.8 MB (everyone's numbers will vary slightly)
+Question #15: Roughly 1935.5 MB (everyone's numbers will vary slightly)
+Question #16: We only have 1 - The Community Edition server runs in local mode where the driver and the one executor are in the same JVM.
+Question #17: Community Edition servers always have 8. Other cluster configurations will naturally be different.
+Question #18: "10.172.254.65" and of course no two users IP address would be the same. If you have multiple executors, the IP address is one way to distinguish them.
+Question #19: If I have 8 cores, then I can execute 8 tasks at any one time. If I had 16 tasks (for 16 partitions) I still can only run 8 of 'em at a time.
+Question #20: /usr/lib/jvm/java-8-openjdk-amd64/jre
